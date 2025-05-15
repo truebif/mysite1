@@ -1,12 +1,13 @@
-import os
 from pathlib import Path
+import os
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SECRET_KEY = 'django-insecure-key'
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['bif86.pythonanywhere.com']  # можешь добавить '*' для тестов
 
 # Приложения проекта
 INSTALLED_APPS = [
@@ -53,7 +54,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -63,7 +64,7 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Парольные валидаторы (включены)
+# Парольные валидаторы
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -85,8 +86,9 @@ LOGIN_REDIRECT_URL = '/'
 
 # Статика
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'app', 'static')]
+STATICFILES_DIRS = [BASE_DIR / 'app' / 'static']
+STATIC_ROOT = BASE_DIR / 'static'  # эта строка важна для collectstatic
 
 # Медиа
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = BASE_DIR / 'media'
