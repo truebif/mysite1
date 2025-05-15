@@ -1,0 +1,48 @@
+{% extends "app/layout.html" %}
+{% load static %}
+
+{% block content %}
+<h2 class="mb-4 text-center">Форма обратной связи</h2>
+
+<div class="d-flex justify-content-center">
+  <div class="card p-4 shadow-sm bg-light" style="max-width: 600px; width: 100%;">
+    {% if form_submitted %}
+        <div class="alert alert-success">Спасибо за отзыв!</div>
+        <ul class="list-group">
+            <li class="list-group-item"><strong>Имя:</strong> {{ name }}</li>
+            <li class="list-group-item"><strong>Email:</strong> {{ email }}</li>
+            <li class="list-group-item"><strong>Оценка:</strong> {{ rating }}</li>
+            <li class="list-group-item"><strong>Улучшения:</strong> {{ improvements|join:", " }}</li>
+            <li class="list-group-item"><strong>Комментарий:</strong> {{ comments }}</li>
+        </ul>
+    {% else %}
+        <form method="post" id="feedbackForm">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary mt-3 w-100" id="submit_button">Отправить</button>
+        </form>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    // Подсветка активного поля
+    $('#feedbackForm input, #feedbackForm textarea').focus(function() {
+        $(this).css('background-color', 'lightyellow');
+    }).blur(function() {
+        $(this).css('background-color', 'white');
+    });
+
+    // Подсветка кнопки отправки
+    $('#submit_button').mouseover(function() {
+        $(this).css('color', 'red');
+    }).mouseout(function() {
+        $(this).css('color', 'white');
+    });
+});
+</script>
+{% endblock %}

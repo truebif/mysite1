@@ -1,0 +1,48 @@
+
+{% extends 'app/layout.html' %}
+{% load static %}
+{% block title %}{{ blog.title }}{% endblock %}
+
+{% block content %}
+<h2>{{ blog.title }}</h2>
+<p><em>Автор: {{ blog.author }} | Дата: {{ blog.posted|date:"d.m.Y H:i" }}</em></p>
+
+{% if blog.image %}
+    <img src="{{ blog.image.url }}" alt="Изображение статьи" style="max-width: 100%; margin-bottom: 15px;">
+{% endif %}
+
+<p><strong>{{ blog.description }}</strong></p>
+<div>{{ blog.content }}</div>
+
+<hr>
+
+<h4>Комментарии:</h4>
+{% if comments %}
+    <ul>
+    {% for comment in comments %}
+        <li>
+          <strong>{{ comment.author }}</strong> 
+          <span style="color: gray;">{{ comment.date|date:"d.m.Y H:i" }}</span><br>
+          {{ comment.text }}
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Пока нет комментариев.</p>
+{% endif %}
+
+{% if user.is_authenticated %}
+    <hr>
+    <h5>Добавить комментарий:</h5>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Отправить</button>
+    </form>
+{% else %}
+    <p><a href="{% url 'login' %}">Войдите</a>, чтобы оставить комментарий.</p>
+{% endif %}
+
+<hr>
+<p><a href="{% url 'blog_list' %}">← Назад к списку</a></p>
+{% endblock %}

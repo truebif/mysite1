@@ -1,0 +1,19 @@
+{% extends 'app/layout.html' %}
+{% load static %}
+
+{% block content %}
+<h1>Полезные ресурсы</h1>
+<p>Ниже приведены ссылки на полезные сайты по разработке веб-приложений:</p>
+
+<div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+  <a href="https://docs.djangoproject.com/" target="_blank">
+    <img src="{% static 'app/content/django_logo.png' %}" alt="Django Docs" width="120">
+  </a>
+  <a href="https://www.python.org/" target="_blank">
+    <img src="{% static 'app/content/python_logo.png' %}" alt="Python" width="120">
+  </a>
+  <a href="https://getbootstrap.com/" target="_blank">
+    <img src="{% static 'app/content/bootstrap_logo.png' %}" alt="Bootstrap" width="120">
+  </a>
+</div>
+{% endblock %}

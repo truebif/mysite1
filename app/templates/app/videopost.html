@@ -1,0 +1,22 @@
+{% extends 'app/layout.html' %}
+{% load static %}
+
+{% block title %}Видеоматериалы{% endblock %}
+
+{% block content %}
+<h2>Обучающие видео</h2>
+
+<div style="margin-bottom: 30px;">
+    <iframe width="640" height="360" src="https://www.youtube.com/embed/mAgKw__y88I?si=eaMa84CH4kytJhsu"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+</div>
+
+<div>
+    <iframe width="640" height="360" src="https://www.youtube.com/embed/6J9qk0vfi_o?si=gtlAHx_xS85_QBRb"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+</div>
+{% endblock %}

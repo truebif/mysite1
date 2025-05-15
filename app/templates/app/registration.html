@@ -1,0 +1,25 @@
+{% extends "app/layout.html" %}
+{% block content %}
+<h2>Регистрация</h2>
+<form method="post" class="border p-4 rounded shadow-sm bg-light">
+  {% csrf_token %}
+  {{ regform.as_p }}
+
+  {% if regform.errors %}
+    <div class="alert alert-danger mt-3">
+      <ul class="mb-0">
+        {% for field in regform %}
+          {% for error in field.errors %}
+            <li><strong>{{ field.label }}:</strong> {{ error }}</li>
+          {% endfor %}
+        {% endfor %}
+        {% for error in regform.non_field_errors %}
+          <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  <button type="submit" class="btn btn-success">Зарегистрироваться</button>
+</form>
+{% endblock %}
